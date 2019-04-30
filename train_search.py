@@ -272,6 +272,8 @@ def train(train_queue, valid_queue, model, network_params, criterion, optimizer,
         input = input.cuda()
         target = target.cuda(non_blocking=True)
         if train_arch:
+            # In the original implementation of DARTS, it is input_search, target_search = next(iter(valid_queue), which slows down
+            # the training when using PyTorch 0.4 and above. 
             try:
                 input_search, target_search = next(valid_queue_iter)
             except:
