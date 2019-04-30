@@ -187,7 +187,7 @@ def adjust_lr(optimizer, epoch):
     if args.epochs -  epoch > 5:
         lr = args.learning_rate * (args.epochs - 5 - epoch) / (args.epochs - 5)
     else:
-        lr = args.learning_rate * (epoch - args.epochs + 6) / ((args.epochs - 5) * 5)
+        lr = args.learning_rate * (args.epochs - epoch) / ((args.epochs - 5) * 5)
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
     return lr        
