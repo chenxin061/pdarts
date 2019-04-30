@@ -1,7 +1,7 @@
 # [Progressive Differentiable Architecture Search:Bridging the Depth Gap between Search and Evaluation](https://arxiv.org/abs/1904.12760)
 by Xin Chen, [Lingxi Xie](http://lingxixie.com/Home.html), [Jun Wu](https://see.tongji.edu.cn/info/1153/6850.htm) and [Qi Tian](https://scholar.google.com/citations?user=61b6eYkAAAAJ&hl=zh-CN).
 
-**This code is based on the original implementation of  [DARTS](https://github.com/quark0/darts).**
+**This code is based on the implementation of  [DARTS](https://github.com/quark0/darts).**
 
 ## Search:
 ```
