@@ -29,5 +29,6 @@ Add --cifar100 if evaluating on CIFAR100.
 python train_imagenet.py \\
        --tmp_data_dir /path/to/your/data \\
        --save log_path \\
+       --auxiliary \\
        --note note_of_this_run
 ```
