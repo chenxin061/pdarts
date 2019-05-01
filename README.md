@@ -1,16 +1,14 @@
 # [Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation](https://arxiv.org/abs/1904.12760)
 by Xin Chen, [Lingxi Xie](http://lingxixie.com/), [Jun Wu](https://see.tongji.edu.cn/info/1153/6850.htm) and [Qi Tian](https://scholar.google.com/citations?user=61b6eYkAAAAJ&hl=zh-CN).
 
-This repository contains the search and evaluation code for our work Progressive DARTS.
-
-It requires only **0.3 GPU-days** (7 hours on a single P100 card) to finish a search progress on CIFAR10 and CIFAR100 datasets,
-much faster than DARTS, and achieves higher classification accuracy on both CIFAR and ImageNet datasets (mobole setting).
-
 **This code is based on the implementation of  [DARTS](https://github.com/quark0/darts).**
 
 ## Introduction
 
-TBD soon.
+This repository contains the search and evaluation code for our work Progressive DARTS.
+
+It requires only **0.3 GPU-days** (7 hours on a single P100 card) to finish a search progress on CIFAR10 and CIFAR100 datasets,
+much faster than DARTS, and achieves higher classification accuracy on both CIFAR and ImageNet datasets (mobole setting).
 
 ## Framework
 
@@ -69,3 +67,9 @@ python train_imagenet.py \\
        --auxiliary \\
        --note note_of_this_run
 ```
+
+## Reference
+
+If you use our code in your research, please cite our paper accordingly.
+
+Xin Chen, Lingxi Xie, Jun Wu, Qi Tian, Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation, arXiv preprint arXiv:1904.12760, 2019.
