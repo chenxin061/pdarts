@@ -26,7 +26,7 @@ TBD soon.
 
 ## Usage
 
-To run our code, you need a GPU with at least **16GB memory**, and equip it with PyTorch 0.3 or above versions.
+To run our code, you need a GPU with at least **16GB memory**, and equip it with PyTorch 0.4 or above versions.
 
 #### Run the following command to perform a search progress on CIFAR10.
 
