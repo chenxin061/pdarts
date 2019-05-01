@@ -8,9 +8,23 @@ much faster than DARTS, and achieves higher classification accuracy on both CIFA
 
 **This code is based on the implementation of  [DARTS](https://github.com/quark0/darts).**
 
-# Introduction
+## Introduction
 
 TBD soon.
+
+## Framework
+
+#### Illustration figure
+
+#### Tricks and description of parameters
+
+## Results
+
+TBD soon.
+
+#### Experimental results (CIFAR and ImageNet)
+
+#### Searched cells
 
 ## Usage
 
