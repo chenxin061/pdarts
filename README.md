@@ -28,6 +28,11 @@ TBD soon.
 
 To run our code, you need a GPU with at least **16GB memory**, and equip it with PyTorch 0.4 or above versions.
 
+If you have a GPU with smaller memory, say 12GB, you need to use a smaller batch-size in the search stage.
+In the current example, using 64 instead of 96 works -- it is a bit slower but does not impact accuracy much.
+
+*We will post more results with a smaller batch size here for your reference.*
+
 #### Run the following command to perform a search progress on CIFAR10.
 
 ```
