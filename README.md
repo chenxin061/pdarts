@@ -59,6 +59,7 @@ For the parameters, please see our paper (we would provided more explanations in
 ```
 python train_cifar.py \\
        --tmp_data_dir /path/to/your/data \\
+       --auxiliary \\
        --save log_path \\
        --note note_of_this_run
 Add --cifar100 if evaluating on CIFAR100.
