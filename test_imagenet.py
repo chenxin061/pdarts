@@ -14,7 +14,6 @@ import torchvision.datasets as dset
 import torchvision.transforms as transforms
 import torch.backends.cudnn as cudnn
 
-from torch.autograd import Variable
 from model import NetworkImageNet as Network
 
 
@@ -22,14 +21,11 @@ parser = argparse.ArgumentParser("imagenet")
 parser.add_argument('--data', type=str, default='../data/imagenet/', help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--report_freq', type=float, default=100, help='report frequency')
-parser.add_argument('--gpu', type=int, default=0, help='gpu device id')
 parser.add_argument('--init_channels', type=int, default=48, help='num of init channels')
 parser.add_argument('--layers', type=int, default=14, help='total number of layers')
-parser.add_argument('--model_path', type=str, default='EXP/model.pt', help='path of pretrained model')
+parser.add_argument('--model_path', type=str, default='../models/imagenet.pth.tar', help='path of pretrained model')
 parser.add_argument('--auxiliary', action='store_true', default=False, help='use auxiliary tower')
-parser.add_argument('--drop_path_prob', type=float, default=0, help='drop path probability')
-parser.add_argument('--seed', type=int, default=0, help='random seed')
-parser.add_argument('--arch', type=str, default='DARTS', help='which architecture to use')
+parser.add_argument('--arch', type=str, default='PDARTS', help='which architecture to use')
 args = parser.parse_args()
 
 log_format = '%(asctime)s %(message)s'
@@ -43,18 +39,12 @@ def main():
   if not torch.cuda.is_available():
     logging.info('no gpu device available')
     sys.exit(1)
-
-  np.random.seed(args.seed)
-  torch.cuda.set_device(args.gpu)
-  cudnn.benchmark = True
-  torch.manual_seed(args.seed)
   cudnn.enabled=True
-  torch.cuda.manual_seed(args.seed)
-  logging.info('gpu device = %d' % args.gpu)
   logging.info("args = %s", args)
 
   genotype = eval("genotypes.%s" % args.arch)
   model = Network(args.init_channels, CLASSES, args.layers, args.auxiliary, genotype)
+  model = nn.DataParallel(model)
   model = model.cuda()
   model.load_state_dict(torch.load(args.model_path)['state_dict'])
 
@@ -75,12 +65,12 @@ def main():
     ]))
 
   valid_queue = torch.utils.data.DataLoader(
-    valid_data, batch_size=args.batch_size, shuffle=False, pin_memory=True, num_workers=4)
+    valid_data, batch_size=args.batch_size, shuffle=False, pin_memory=False, num_workers=4)
 
-  model.drop_path_prob = args.drop_path_prob
+  model.module.drop_path_prob = 0.0
   valid_acc_top1, valid_acc_top5, valid_obj = infer(valid_queue, model, criterion)
-  logging.info('valid_acc_top1 %f', valid_acc_top1)
-  logging.info('valid_acc_top5 %f', valid_acc_top5)
+  logging.info('Valid_acc_top1 %f', valid_acc_top1)
+  logging.info('Valid_acc_top5 %f', valid_acc_top5)
 
 
 def infer(valid_queue, model, criterion):
@@ -90,20 +80,20 @@ def infer(valid_queue, model, criterion):
   model.eval()
 
   for step, (input, target) in enumerate(valid_queue):
-    input = Variable(input, volatile=True).cuda()
-    target = Variable(target, volatile=True).cuda(async=True)
-
-    logits, _ = model(input)
-    loss = criterion(logits, target)
+    input = input.cuda()
+    target = target.cuda()
+    with torch.no_grad():
+      logits, _ = model(input)
+      loss = criterion(logits, target)
 
     prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
     n = input.size(0)
-    objs.update(loss.data[0], n)
-    top1.update(prec1.data[0], n)
-    top5.update(prec5.data[0], n)
+    objs.update(loss.data.item(), n)
+    top1.update(prec1.data.item(), n)
+    top5.update(prec5.data.item(), n)
 
     if step % args.report_freq == 0:
-      logging.info('valid %03d %e %f %f', step, objs.avg, top1.avg, top5.avg)
+      logging.info('Valid %03d %e %f %f', step, objs.avg, top1.avg, top5.avg)
 
   return top1.avg, top5.avg, objs.avg
 
