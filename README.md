@@ -9,6 +9,8 @@ by Xin Chen, [Lingxi Xie](http://lingxixie.com/), [Jun Wu](https://see.tongji.ed
 
 **Our approach is much more stable than DARTS, making it easily generalized to (i) deeper network architecture search, (ii) datasets with more classes (like CIFAR100), so it has potentials to be used to more complex vision tasks.**
 
+**The search process in CIFAR10 or CIFAR100 only requires 0.3 GPU-days, *i.e.*, ~7 hours on one single GPU.**
+
 ## Introduction
 
 This repository contains the search and evaluation code for our work Progressive DARTS.
