@@ -19,21 +19,22 @@ It requires only **0.3 GPU-days** (7 hours on a single P100 card) to finish a se
 much faster than DARTS, and achieves higher classification accuracy on both CIFAR and ImageNet datasets (mobole setting).
 
 ## Framework
-![pipeline](https://github.com/chenxin061/pdarts/pipeline2.jpg)
 #### Illustration figure
+![pipeline](https://github.com/chenxin061/pdarts/blob/master/pipeline2.jpg)
+
 
 #### Tricks and description of parameters
 
 ## Results
 #### Results on CIFAR10 and CIFAR100
-![Table_CIFAR](https://github.com/chenxin061/pdarts/Table1.png)
+![Table_CIFAR](https://github.com/chenxin061/pdarts/blob/master/Table1.png)
 #### Results on ImageNet
-![Table_ImageNet](https://github.com/chenxin061/pdarts/Table2.png)
+![Table_ImageNet](https://github.com/chenxin061/pdarts/blob/master/Table2.png)
 ### Searched cells
 #### Normal Cell
-![C10_normal](https://github.com/chenxin061/pdarts/C10_normal.jpg)
+![C10_normal](https://github.com/chenxin061/pdarts/blob/master/C10_normal.jpg)
 #### Reduction Cell
-![C10_reduce](https://github.com/chenxin061/pdarts/C10_reduce.jpg)
+![C10_reduce](https://github.com/chenxin061/pdarts/blob/master/C10_reduce.jpg)
 
 ## Usage
 
