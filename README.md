@@ -31,6 +31,7 @@ much faster than DARTS, and achieves higher classification accuracy on both CIFA
 #### Results on ImageNet
 ![Table_ImageNet](https://github.com/chenxin061/pdarts/blob/master/Table2.png)
 ### Searched cells
+Here we provide the searched cells in one run on CIFAR10 (the paper included those from another run). Note that the searched normal cell is **deeper** than that from DARTS (there are 3 conv layers cascaded one after another). This shows that our progressive search strategy really found something different, because we considered deeper architectures during search. Please read the paper for a comparison between search in different depths.
 #### Normal Cell
 ![C10_normal](https://github.com/chenxin061/pdarts/blob/master/C10_normal.jpg)
 #### Reduction Cell
