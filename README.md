@@ -85,6 +85,19 @@ python train_imagenet.py \\
        --auxiliary \\
        --note note_of_this_run
 ```
+We also provide pre-trained models of the discovered architecture on CIFAR10 and ImageNet.
+You can download them from BaiduYun: [C10](https://pan.baidu.com/s/1d9AS-GNWa7EezZD6bQLHYg)(code: vxby) and [ImageNet](https://pan.baidu.com/s/1tAEqI8MgKF1tDbAnVKcreA)(code: u65g).
+
+##### Here is the usage:
+```
+python test.py \\
+       --auxiliary \\
+       --model_path /path/to/your/model \\
+       --data /path/to/your/data
+```
+You will get a valid accuracy of 97.58%.
+
+For ImageNet, replace `test.py` with `test_imagenet.py` and you will get a top-1 valid accuracy of 75.6% and a top-5 valid accuracy of 92.6%.
 
 ## Reference
 
