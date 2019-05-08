@@ -3,6 +3,12 @@ by Xin Chen, [Lingxi Xie](http://lingxixie.com/), [Jun Wu](https://see.tongji.ed
 
 **This code is based on the implementation of  [DARTS](https://github.com/quark0/darts).**
 
+## Highlights of Progressive DARTS
+
+**Searched on CIFAR10, we achieved currently one of, if not only, the best performance on ImageNet (24.4%/7.4%) under the mobile setting!**
+
+**Our approach is much more stable than DARTS, making it easily generalized to (i) deeper network architecture search, (ii) datasets with more classes (like CIFAR100), so it has potentials to be used to more complex vision tasks.**
+
 ## Introduction
 
 This repository contains the search and evaluation code for our work Progressive DARTS.
