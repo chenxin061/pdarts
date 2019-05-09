@@ -98,7 +98,7 @@ python test.py \\
        --model_path /path/to/your/model \\
        --data /path/to/your/data
 ```
-You will get a valid accuracy of 97.58%.
+You will get a valid accuracy of 97.58% on CIFAR10.
 
 For ImageNet, replace `test.py` with `test_imagenet.py` and you will get a top-1 valid accuracy of 75.6% and a top-5 valid accuracy of 92.6%.
 
