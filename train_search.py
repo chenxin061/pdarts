@@ -182,6 +182,7 @@ def main():
                 if switches_normal[i][j]:
                     idxs.append(j)
             if sp == len(num_to_keep) - 1:
+                # for the last stage, drop all Zero operations
                 drop = get_min_k_no_zero(normal_prob[i, :], idxs, num_to_drop[sp])
             else:
                 drop = get_min_k(normal_prob[i, :], num_to_drop[sp])
@@ -218,7 +219,7 @@ def main():
                 if switches_reduce_2[i][0] == True:
                     reduce_prob[i][0] = 0
                 reduce_final[i] = max(reduce_prob[i])                
-            # Generate Architecture
+            # Generate Architecture, similar to DARTS
             keep_normal = [0, 1]
             keep_reduce = [0, 1]
             n = 3
@@ -235,6 +236,7 @@ def main():
                 keep_reduce.append(edge_r[-2] + start)
                 start = end
                 n = n + 1
+            # set switches according the ranking of arch parameters
             for i in range(14):
                 if not i in keep_normal:
                     for j in range(len(PRIMITIVES)):
@@ -247,10 +249,11 @@ def main():
             logging.info(genotype)
             ## restrict skipconnect (normal cell only)
             logging.info('Restricting skipconnect...')
+            # generating genotypes with different numbers of skip-connect operations
             for sks in range(0, 9):
                 max_sk = 8 - sks                
-                num_sk = check_sk_number(switches_normal)
-                if num_sk < max_sk:
+                num_sk = check_sk_number(switches_normal)               
+                if not num_sk > max_sk:
                     continue
                 while num_sk > max_sk:
                     normal_prob = delete_min_sk_prob(switches_normal, switches_normal_2, normal_prob)
