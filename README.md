@@ -89,7 +89,7 @@ python train_imagenet.py \\
        --note note_of_this_run
 ```
 We also provide pre-trained models of the discovered architecture on CIFAR10 and ImageNet.
-You can download them from BaiduYun: [C10](https://pan.baidu.com/s/1d9AS-GNWa7EezZD6bQLHYg)(code: vxby) and [ImageNet](https://pan.baidu.com/s/1tAEqI8MgKF1tDbAnVKcreA)(code: u65g).
+You can download them from BaiduYun: [C10](https://pan.baidu.com/s/1d9AS-GNWa7EezZD6bQLHYg)(code: vxby) and [ImageNet](https://pan.baidu.com/s/1tAEqI8MgKF1tDbAnVKcreA)(code: u65g) or Google Drive: [C10](https://drive.google.com/open?id=1XsU7Lsh8gyFvIE-mP7LATiHbBr2f_FMH) and [ImageNet](https://drive.google.com/open?id=1w8DiQInnDnUZCYgb49mo9YsLLBibY-gX).
 
 ##### Here is the usage:
 ```
