@@ -65,7 +65,7 @@ Add --cifar100 if search on CIFAR100.
 
 It needs ~7 hours on a single P100 GPU. ~~or 12 hours on a single 1080-Ti GPU to finish everything.~~
 Update: My colleague tried the search process with a single 1080-Ti GPU and finished in less than 7 hours.
-Many thhanks to Hengheng.
+Many thanks to Hengheng.
 
 For the parameters, please see our paper (we would provided more explanations in this README soon).
 
