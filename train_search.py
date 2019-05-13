@@ -118,7 +118,7 @@ def main():
     if len(args.add_layers) == 3:
         add_layers = args.add_layers
     else:
-        add_layers = [0, 3, 6]
+        add_layers = [0, 6, 12]
     if len(args.dropout_rate) ==3:
         drop_rate = args.dropout_rate
     else:
