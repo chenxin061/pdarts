@@ -63,9 +63,8 @@ python train_search.py \\
 Add --cifar100 if search on CIFAR100.
 ```
 
-It needs ~7 hours on a single P100 GPU. ~~or 12 hours on a single 1080-Ti GPU to finish everything.~~
-Update: My colleague tried the search process with a single 1080-Ti GPU and finished in less than 7 hours.
-Many thanks to Hengheng.
+It needs ~7 hours on a single P100 GPU, or 12 hours on a single 1080-Ti GPU to finish everything.
+Our test with a limitation of 12 memory on P100 GPU tooks about 9 hours to finish the search. 
 
 For the parameters, please see our paper (we would provided more explanations in this README soon).
 
