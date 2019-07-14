@@ -77,8 +77,7 @@ def main():
     logging.info(genotype)
     print('--------------------------')
     model = Network(args.init_channels, CIFAR_CLASSES, args.layers, args.auxiliary, genotype)
-    if num_gpus > 1:
-        model = torch.nn.DataParallel(model)
+    model = torch.nn.DataParallel(model)
     model = model.cuda()
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
@@ -112,10 +111,8 @@ def main():
     for epoch in range(args.epochs):
         scheduler.step()
         logging.info('Epoch: %d lr %e', epoch, scheduler.get_lr()[0])
-        if num_gpus > 1:
-            model.module.drop_path_prob = args.drop_path_prob * epoch / args.epochs
-        else:
-            model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
+        model.module.drop_path_prob = args.drop_path_prob * epoch / args.epochs
+        model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
         start_time = time.time()
         train_acc, train_obj = train(train_queue, model, criterion, optimizer)
         logging.info('Train_acc: %f', train_acc)
@@ -127,7 +124,7 @@ def main():
         end_time = time.time()
         duration = end_time - start_time
         print('Epoch time: %ds.' % duration )
-        utils.save(model, os.path.join(args.save, 'weights.pt'))
+        utils.save(model.module, os.path.join(args.save, 'weights.pt'))
 
 def train(train_queue, model, criterion, optimizer):
     objs = utils.AvgrageMeter()
