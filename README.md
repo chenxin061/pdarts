@@ -1,6 +1,8 @@
 # [Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation](https://arxiv.org/abs/1904.12760)
 by Xin Chen, [Lingxi Xie](http://lingxixie.com/), [Jun Wu](https://see.tongji.edu.cn/info/1153/6850.htm) and [Qi Tian](https://scholar.google.com/citations?user=61b6eYkAAAAJ&hl=zh-CN).
 
+**P-DARTS has been accepted for oral presentation at ICCV 2019!**
+
 **This code is based on the implementation of  [DARTS](https://github.com/quark0/darts).**
 
 ## Highlights of Progressive DARTS
@@ -108,4 +110,4 @@ For ImageNet, replace `test.py` with `test_imagenet.py` and you will get a top-1
 
 If you use our code in your research, please cite our paper accordingly.
 
-Xin Chen, Lingxi Xie, Jun Wu, Qi Tian, Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation, arXiv preprint arXiv:1904.12760, 2019.
+Xin Chen, Lingxi Xie, Jun Wu, Qi Tian, Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation, ICCV, 2019.
