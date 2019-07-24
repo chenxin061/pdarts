@@ -111,3 +111,5 @@ For ImageNet, replace `test.py` with `test_imagenet.py` and you will get a top-1
 If you use our code in your research, please cite our paper accordingly.
 
 Xin Chen, Lingxi Xie, Jun Wu, Qi Tian, Progressive Differentiable Architecture Search: Bridging the Depth Gap between Search and Evaluation, ICCV, 2019.
+
+You may also be interested in PC-DARTS, a memory-efficient differentiable architecture search method. Please refer to its [arxiv link](https://arxiv.org/pdf/1907.05737.pdf) and [code](https://github.com/yuhuixu1993/PC-DARTS). 
