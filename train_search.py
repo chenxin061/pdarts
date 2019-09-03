@@ -126,7 +126,7 @@ def main():
     eps_no_archs = [10, 10, 10]
     for sp in range(len(num_to_keep)):
         model = Network(args.init_channels + int(add_width[sp]), CIFAR_CLASSES, args.layers + int(add_layers[sp]), criterion, switches_normal=switches_normal, switches_reduce=switches_reduce, p=float(drop_rate[sp]))
-        
+        model = nn.DataParallel(model)
         model = model.cuda()
         logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
         network_params = []
@@ -138,7 +138,7 @@ def main():
                 args.learning_rate,
                 momentum=args.momentum,
                 weight_decay=args.weight_decay)
-        optimizer_a = torch.optim.Adam(model.arch_parameters(),
+        optimizer_a = torch.optim.Adam(model.module.arch_parameters(),
                     lr=args.arch_learning_rate, betas=(0.5, 0.999), weight_decay=args.arch_weight_decay)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
                 optimizer, float(args.epochs), eta_min=args.learning_rate_min)
@@ -153,12 +153,12 @@ def main():
             epoch_start = time.time()
             # training
             if epoch < eps_no_arch:
-                model.p = float(drop_rate[sp]) * (epochs - epoch - 1) / epochs
-                model.update_p()
+                model.module.p = float(drop_rate[sp]) * (epochs - epoch - 1) / epochs
+                model.module.update_p()
                 train_acc, train_obj = train(train_queue, valid_queue, model, network_params, criterion, optimizer, optimizer_a, lr, train_arch=False)
             else:
-                model.p = float(drop_rate[sp]) * np.exp(-(epoch - eps_no_arch) * scale_factor) 
-                model.update_p()                
+                model.module.p = float(drop_rate[sp]) * np.exp(-(epoch - eps_no_arch) * scale_factor) 
+                model.module.update_p()                
                 train_acc, train_obj = train(train_queue, valid_queue, model, network_params, criterion, optimizer, optimizer_a, lr, train_arch=True)
             logging.info('Train_acc %f', train_acc)
             epoch_duration = time.time() - epoch_start
@@ -174,7 +174,7 @@ def main():
             switches_normal_2 = copy.deepcopy(switches_normal)
             switches_reduce_2 = copy.deepcopy(switches_reduce)
         # drop operations with low architecture weights
-        arch_param = model.arch_parameters()
+        arch_param = model.module.arch_parameters()
         normal_prob = F.softmax(arch_param[0], dim=sm_dim).data.cpu().numpy()        
         for i in range(14):
             idxs = []
@@ -206,7 +206,7 @@ def main():
         logging_switches(switches_reduce)
         
         if sp == len(num_to_keep) - 1:
-            arch_param = model.arch_parameters()
+            arch_param = model.module.arch_parameters()
             normal_prob = F.softmax(arch_param[0], dim=sm_dim).data.cpu().numpy()
             reduce_prob = F.softmax(arch_param[1], dim=sm_dim).data.cpu().numpy()
             normal_final = [0 for idx in range(14)]
@@ -288,7 +288,7 @@ def train(train_queue, valid_queue, model, network_params, criterion, optimizer,
             logits = model(input_search)
             loss_a = criterion(logits, target_search)
             loss_a.backward()
-            nn.utils.clip_grad_norm_(model.arch_parameters(), args.grad_clip)
+            nn.utils.clip_grad_norm_(model.module.arch_parameters(), args.grad_clip)
             optimizer_a.step()
 
         optimizer.zero_grad()
