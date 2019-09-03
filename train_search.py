@@ -26,7 +26,6 @@ parser.add_argument('--learning_rate_min', type=float, default=0.0, help='min le
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
 parser.add_argument('--weight_decay', type=float, default=3e-4, help='weight decay')
 parser.add_argument('--report_freq', type=float, default=50, help='report frequency')
-parser.add_argument('--gpu', type=int, default=0, help='GPU device id')
 parser.add_argument('--epochs', type=int, default=25, help='num of training epochs')
 parser.add_argument('--init_channels', type=int, default=16, help='num of init channels')
 parser.add_argument('--layers', type=int, default=5, help='total number of layers')
@@ -69,12 +68,10 @@ def main():
         logging.info('No GPU device available')
         sys.exit(1)
     np.random.seed(args.seed)
-    torch.cuda.set_device(args.gpu)
     cudnn.benchmark = True
     torch.manual_seed(args.seed)
     cudnn.enabled=True
     torch.cuda.manual_seed(args.seed)
-    logging.info('GPU device = %d' % args.gpu)
     logging.info("args = %s", args)
     #  prepare dataset
     if args.cifar100:
